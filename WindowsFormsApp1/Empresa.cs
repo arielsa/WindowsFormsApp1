@@ -21,6 +21,7 @@ namespace WindowsFormsApp1
 
         public object RetornaListaPersona()
         {
+<<<<<<< HEAD
             var query = (from p in lp
                         select new
                         {
@@ -29,6 +30,9 @@ namespace WindowsFormsApp1
                         }).ToArray();
 
             return query;
+=======
+            
+>>>>>>> 49a42d0069ec55951cecf023fd8ae29c3c6804b8
         }
     }
 }
