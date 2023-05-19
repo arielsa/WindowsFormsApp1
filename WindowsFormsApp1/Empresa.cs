@@ -18,10 +18,20 @@ namespace WindowsFormsApp1
         {
             lp.Add( new Persona (pPersona) );
         }
+        public void BorrarPersona (Persona pPersona)
+        {
+            try
+            {
+                Persona p = lp.Find(x => x.DNI == pPersona.DNI);
+                if (p == null) throw new Exception("la persona no existe");
+                lp.Remove(p);
+            }
+            catch (Exception ex){ throw ex; }
+        }
 
         public object RetornaListaPersona()
         {
-<<<<<<< HEAD
+
             var query = (from p in lp
                         select new
                         {
@@ -30,6 +40,10 @@ namespace WindowsFormsApp1
                         }).ToArray();
 
             return query;
+        }
+        public bool ValidaDNIPersona(Persona pPersona)
+        {
+            return lp.Exists(x => x.DNI == pPersona.DNI);
         }
     }
 }
