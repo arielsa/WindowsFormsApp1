@@ -31,7 +31,13 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnAgregar1 = new System.Windows.Forms.Button();
             this.btnBorrar = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.btnBorrarAuto = new System.Windows.Forms.Button();
+            this.btnAgregarAuto = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnModificarAuto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -68,11 +74,69 @@
             this.btnBorrar.UseVisualStyleBackColor = true;
             this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(635, 0);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersWidth = 62;
+            this.dataGridView2.RowTemplate.Height = 28;
+            this.dataGridView2.Size = new System.Drawing.Size(521, 237);
+            this.dataGridView2.TabIndex = 3;
+            // 
+            // btnBorrarAuto
+            // 
+            this.btnBorrarAuto.Location = new System.Drawing.Point(765, 255);
+            this.btnBorrarAuto.Name = "btnBorrarAuto";
+            this.btnBorrarAuto.Size = new System.Drawing.Size(103, 43);
+            this.btnBorrarAuto.TabIndex = 4;
+            this.btnBorrarAuto.Text = "Borrar";
+            this.btnBorrarAuto.UseVisualStyleBackColor = true;
+            this.btnBorrarAuto.Click += new System.EventHandler(this.btnBorrarAuto_Click);
+            // 
+            // btnAgregarAuto
+            // 
+            this.btnAgregarAuto.Location = new System.Drawing.Point(635, 255);
+            this.btnAgregarAuto.Name = "btnAgregarAuto";
+            this.btnAgregarAuto.Size = new System.Drawing.Size(103, 43);
+            this.btnAgregarAuto.TabIndex = 5;
+            this.btnAgregarAuto.Text = "agregar";
+            this.btnAgregarAuto.UseVisualStyleBackColor = true;
+            this.btnAgregarAuto.Click += new System.EventHandler(this.btnAgregarAuto_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(276, 255);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(103, 43);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Modificar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnModificarAuto
+            // 
+            this.btnModificarAuto.Location = new System.Drawing.Point(903, 255);
+            this.btnModificarAuto.Name = "btnModificarAuto";
+            this.btnModificarAuto.Size = new System.Drawing.Size(103, 43);
+            this.btnModificarAuto.TabIndex = 7;
+            this.btnModificarAuto.Text = "Modificar";
+            this.btnModificarAuto.UseVisualStyleBackColor = true;
+            this.btnModificarAuto.Click += new System.EventHandler(this.btnModificarAuto_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1183, 622);
+            this.Controls.Add(this.btnModificarAuto);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAgregarAuto);
+            this.Controls.Add(this.btnBorrarAuto);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.btnAgregar1);
             this.Controls.Add(this.dataGridView1);
@@ -80,6 +144,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -89,6 +154,11 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnAgregar1;
         private System.Windows.Forms.Button btnBorrar;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button btnBorrarAuto;
+        private System.Windows.Forms.Button btnAgregarAuto;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnModificarAuto;
     }
 }
 

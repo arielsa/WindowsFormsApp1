@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
@@ -16,7 +17,16 @@ namespace WindowsFormsApp1
         }
         public void AgregarPersona (Persona pPersona)
         {
-            lp.Add( new Persona (pPersona) );
+            try
+            {
+                if (ValidaDNIPersona(pPersona)) { throw new Exception("dni xistente"); } else { lp.Add(new Persona(pPersona)); }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            
+        }
+        public void AgregarAuto (Auto pAuto)
+        {
+            la.Add( new Auto (pAuto) );
         }
         public void BorrarPersona (Persona pPersona)
         {
@@ -28,22 +38,70 @@ namespace WindowsFormsApp1
             }
             catch (Exception ex){ throw ex; }
         }
+        public void BorrarAuto(Auto pAuto)
+        {
+            try
+            {
+                Auto a = la.Find(x => x.Patente == pAuto.Patente);
+                if (a == null) throw new Exception("patente inexistente");
+                la.Remove(a);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+        public void ModificarPersona(Persona pPersona)
+        {
+            try
+            {
+                Persona p = lp.Find(x => x.DNI == pPersona.DNI);
+                if (p == null) throw new Exception("no se encontro el dni");
+                p.Nombre=pPersona.Nombre;
+                p.Apellido=pPersona.Apellido;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message);  }
+        }
+        public void ModificarAuto(Auto pAuto)
+        {
+            try
+            {
+                Auto a = la.Find(x => x.Patente == pAuto.Patente);
+                if (a == null) throw new Exception("no se encontro el patente");
+                a.Modelo = pAuto.Modelo;
+                a.Marca = pAuto.Marca;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
         public object RetornaListaPersona()
         {
-
             var query = (from p in lp
                         select new
                         {
                             DNI = p.DNI,
-                            apellido_y_nombre = $"{p.Apellido},{p.Nombre}"
+                            apellido_y_nombre = $"{p.Apellido}, {p.Nombre}"
                         }).ToArray();
-
             return query;
+        }
+        public object RetornarListaAuto()
+        {
+            return (from a in la select new {
+                                                Patente = a.Patente,
+                                                Marca_y_Modelo = $"{a.Marca}, {a.Modelo}",
+                                                Año = a.Año,
+                                                Precio = a.Precio,
+                                                }).ToArray();
+            
         }
         public bool ValidaDNIPersona(Persona pPersona)
         {
             return lp.Exists(x => x.DNI == pPersona.DNI);
         }
+        public bool ValidarPatente (Auto pAuto)
+        {
+            return la.Exists(x => x.Patente == pAuto.Patente );
+        }
+        
     }
 }
