@@ -34,6 +34,10 @@ namespace WindowsFormsApp1
             {
                 Persona p = lp.Find(x => x.DNI == pPersona.DNI);
                 if (p == null) throw new Exception("la persona no existe");
+                foreach (Auto a in p.RetornarListaAuto())
+                {
+                    la.Find(x => x.Patente == a.Patente).AgregarDueño(null);
+                }
                 lp.Remove(p);
             }
             catch (Exception ex){ throw ex; }
@@ -91,8 +95,7 @@ namespace WindowsFormsApp1
                                                 Marca_y_Modelo = $"{a.Marca}, {a.Modelo}",
                                                 Año = a.Año,
                                                 Precio = a.Precio,
-                                                }).ToArray();
-            
+                                                }).ToArray();            
         }
         public bool ValidaDNIPersona(Persona pPersona)
         {
@@ -102,6 +105,38 @@ namespace WindowsFormsApp1
         {
             return la.Exists(x => x.Patente == pAuto.Patente );
         }
-        
+        public void AsignaAutoAPersona(Persona pPersona, Auto pAuto)
+        {
+
+            try
+            {
+                Persona p = lp.Find(x => x.DNI == pPersona.DNI);
+                Auto a = la.Find(x => x.Patente == pAuto.Patente);
+                if (a == null || p == null) throw new Exception("auto o persona nula");
+                if (a.RetornaDueño() != null) throw new Exception(" el auto ya tiene dueño ");
+                a.AgregarDueño(new Persona(p));
+                p.AgregarAuto(new Auto (a));
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            
+            
+
+        }
+
+        public object RetornarListaAutoDePersona(Persona pPersona)
+        {
+            Persona p = lp.Find(x => x.DNI == pPersona.DNI);
+
+            return (from a in p.RetornarListaAuto()
+                    select new
+                    {
+                        Patente = a.Patente,
+                        Marca_y_Modelo = $"{a.Marca}, {a.Modelo}",
+                        Año = a.Año,
+                        Precio = a.Precio,
+                    }).ToArray();
+        }
+
     }
 }
