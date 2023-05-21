@@ -10,7 +10,7 @@ namespace WindowsFormsApp1
     {
         List<Auto> la;
         public Persona(){ la=new List<Auto>(); }
-        public Persona( string pNombre, string pDni, string pApellido) : this ( )
+        public Persona( string pNombre = "", string pDni = "", string pApellido = "") : this ( )
         {
             
             Nombre = pNombre;
@@ -21,6 +21,19 @@ namespace WindowsFormsApp1
         public Persona (Persona pPersona) : this (pPersona.Nombre,pPersona.DNI,pPersona.Apellido) 
         {
 
+        }
+        public void AgregarAuto(Auto pAuto)
+        {
+            la.Add(new Auto(pAuto));
+        }
+        public List<Auto> RetornarListaAuto()
+        {
+            return (from a in la
+                    select new Auto(a.Patente, a.Marca, a.Modelo, a.Año, a.Precio)).ToList();
+        }
+        public int RetornaCantidadAutos()
+        {
+            return la.Count();
         }
 
         public string Nombre { get; set; }

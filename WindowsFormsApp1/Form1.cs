@@ -82,6 +82,7 @@ namespace WindowsFormsApp1
                 Persona p = new Persona( "",f.Cells[0].Value.ToString(),"");
                 empresa.BorrarPersona(p);
                 Mostrar(dataGridView1,empresa.RetornaListaPersona());
+                dataGridView1_RowEnter(null, null);
             }
             catch (Exception ex){ MessageBox.Show(ex.Message); }
         }
@@ -121,7 +122,7 @@ namespace WindowsFormsApp1
                 var x = f.Cells[1].Value.ToString().Split(new string[] { ", " } , StringSplitOptions.None);
 
                 p.Nombre = Interaction.InputBox("Nombre", "modificar nombre", x[1]);
-                p.Apellido = Interaction.InputBox("apellido: ", "modificar apellido", x[0]);
+                p.Apellido = Interaction.InputBox("apellido: ", "modificar apellido", x[0]);                
 
                 empresa.ModificarPersona(p);
                 Mostrar(dataGridView1,empresa.RetornaListaPersona());
@@ -161,6 +162,42 @@ namespace WindowsFormsApp1
                 Mostrar(dataGridView2, empresa.RetornarListaAuto());
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnAsignar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView1.Rows.Count == 0) throw new Exception("no hay persona");
+                if (dataGridView2.Rows.Count == 0) throw new Exception("no hay auto");
+                empresa.AsignaAutoAPersona(
+                                           new Persona( "",dataGridView1.SelectedRows[0].Cells[0].Value.ToString(),"" ),
+                                              new Auto( dataGridView2.SelectedRows[0].Cells[0].Value.ToString() )
+                                              );
+                Persona p = new Persona("", dataGridView1.SelectedRows[0].Cells[0].Value.ToString(), "");
+                Mostrar(dataGridView3, empresa.RetornarListaAutoDePersona(p));
+
+            }
+            catch (Exception ex){ MessageBox.Show(ex.Message);}
+
+            
+
+        }
+
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dataGridView1.Rows.Count == 0) { dataGridView3.DataSource = null; throw new Exception(); }
+                Persona p = new Persona("", dataGridView1.SelectedRows[0].Cells[0].Value.ToString(), "");
+                Mostrar(dataGridView3, empresa.RetornarListaAutoDePersona(p));
+
+            }
+            catch (Exception)
+            {
+
+                
+            }
         }
     }
 }
