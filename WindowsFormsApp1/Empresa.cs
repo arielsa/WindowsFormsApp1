@@ -64,6 +64,14 @@ namespace WindowsFormsApp1
                 if (p == null) throw new Exception("no se encontro el dni");
                 p.Nombre=pPersona.Nombre;
                 p.Apellido=pPersona.Apellido;
+
+                List <Auto> laPersona= p.RetornarListaAuto();
+                foreach (Auto a in laPersona)
+                {
+                    Auto auxAuto =  la.Find(x => x.Patente == a.Patente);
+
+                    auxAuto.AgregarDueño(new Persona(p.Nombre,p.DNI,p.Apellido));
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message);  }
         }
@@ -123,7 +131,6 @@ namespace WindowsFormsApp1
             
 
         }
-
         public object RetornarListaAutoDePersona(Persona pPersona)
         {
             Persona p = lp.Find(x => x.DNI == pPersona.DNI);
@@ -135,6 +142,17 @@ namespace WindowsFormsApp1
                         Marca_y_Modelo = $"{a.Marca}, {a.Modelo}",
                         Año = a.Año,
                         Precio = a.Precio,
+                    }).ToArray();
+        }
+        public object RetornaListaAutoGrilla4()
+        {
+            return la.Count == 0 ? null : (from a in la
+                    select new
+                    {
+                        Patente = a.Patente,
+                        Marca_y_Modelo = $"{a.Marca}, {a.Modelo}",
+                        DNI = a.RetornaDueño()   == null? "" : a.RetornaDueño().DNI,
+                       Nombre = a.RetornaDueño() == null? "" : a.RetornaDueño().Nombre, 
                     }).ToArray();
         }
 

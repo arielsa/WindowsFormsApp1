@@ -39,6 +39,7 @@ namespace WindowsFormsApp1
 
             Mostrar(dataGridView1,empresa.RetornaListaPersona());
             Mostrar(dataGridView2, empresa.RetornarListaAuto());
+            Mostrar(dataGridView4,empresa.RetornaListaAutoGrilla4());
 
         }
         Regex re;
@@ -83,6 +84,7 @@ namespace WindowsFormsApp1
                 empresa.BorrarPersona(p);
                 Mostrar(dataGridView1,empresa.RetornaListaPersona());
                 dataGridView1_RowEnter(null, null);
+                Mostrar(dataGridView4, empresa.RetornaListaAutoGrilla4());
             }
             catch (Exception ex){ MessageBox.Show(ex.Message); }
         }
@@ -113,7 +115,6 @@ namespace WindowsFormsApp1
         {
             try
             {
-                MessageBox.Show("entro");
                 if (dataGridView1.Rows.Count == 0) throw new Exception("grilla vacia");
                 DataGridViewRow f = dataGridView1.SelectedRows[0];
                 Persona p = new Persona ( "",f.Cells[0].Value.ToString(),"");
@@ -126,6 +127,7 @@ namespace WindowsFormsApp1
 
                 empresa.ModificarPersona(p);
                 Mostrar(dataGridView1,empresa.RetornaListaPersona());
+                Mostrar(dataGridView4, empresa.RetornaListaAutoGrilla4());
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -146,6 +148,7 @@ namespace WindowsFormsApp1
 
                 empresa.ModificarAuto(a);
                 Mostrar(dataGridView2, empresa.RetornarListaAuto());
+                Mostrar(dataGridView4, empresa.RetornaListaAutoGrilla4());
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -160,6 +163,7 @@ namespace WindowsFormsApp1
                 Auto a = new Auto( f.Cells[0].Value.ToString(),"","","",0000);
                 empresa.BorrarAuto(a);
                 Mostrar(dataGridView2, empresa.RetornarListaAuto());
+                Mostrar(dataGridView4, empresa.RetornaListaAutoGrilla4());
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -176,6 +180,7 @@ namespace WindowsFormsApp1
                                               );
                 Persona p = new Persona("", dataGridView1.SelectedRows[0].Cells[0].Value.ToString(), "");
                 Mostrar(dataGridView3, empresa.RetornarListaAutoDePersona(p));
+                Mostrar(dataGridView4, empresa.RetornaListaAutoGrilla4());
 
             }
             catch (Exception ex){ MessageBox.Show(ex.Message);}
